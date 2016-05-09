@@ -1,0 +1,63 @@
+---
+title       : 1st Shiny App 
+subtitle    : Central Limit Theorem with Exponential Distribution
+author      : Jenny Chen
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Overview
+
+In this project, we investigate the exponential distribution and compare it with the Central Limit Theorem (CLT). From CLT, as the sample size (n) increase, the distribution of sample mean will approach normal distribution. 
+
+--- .class #id 
+
+## What can we do with this Shiny App?
+In this Shiny App, we can observe the difference of exponential distribution with difference sample size by specifing N1 and N2. We generate random sample variables with one thousand simulations and specify lambda=0.2.
+
+--- .class #id 
+
+## Example
+
+Following is the code to simulate exponential distribution 1000 times with sample size N1=1 and N2=40.
+
+```{r}
+# Specify variables
+set.seed(888)
+n1=1
+n2=40
+noism=1000
+lambda=0.2
+# 1. Simulate Exponatial random variable with n=1
+Sample1<-matrix(rexp(n1*noism, rate=lambda), noism)
+SampleMean1<-apply(Sample1,1,mean)
+samplemean1<-data.frame(x=SampleMean1)
+# 2. Simulate Exponatial random variable with n=40
+Sample2<-matrix(rexp(n2*noism, rate=lambda), noism)
+SampleMean2<-apply(Sample2,1,mean)
+samplemean2<-data.frame(x=SampleMean2)
+
+```
+
+--- .class #id 
+
+## Example (continue)
+
+From following plot, we can see when the sample size increase from 1 to 40, the exponential distribution approach normal distribution.
+
+```{r, echo=FALSE, warning=FALSE}
+library(ggplot2)
+g<-ggplot()
+g<-g+geom_density(data=samplemean1,aes(x=x,colour="Exponentials Distribution(n=1)"),linetype="solid")
+g<-g+geom_density(data=samplemean2,aes(x=x,colour="Exponentials Distribution(n=40)"),linetype="solid")
+g<-g+labs(title="Exponentials Distribution vs Normal Distribution")
+g<-g+xlim(c(0,10))
+g
+```
+
+
