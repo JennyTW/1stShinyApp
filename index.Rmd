@@ -20,6 +20,9 @@ In this project, we investigate the exponential distribution and compare it with
 ## What can we do with this Shiny App?
 In this Shiny App, we can observe the difference of exponential distribution with difference sample size by specifing N1 and N2. We generate random sample variables with one thousand simulations and specify lambda=0.2.
 
+The code of this Shiny App: https://github.com/JennyTW/1stShinyApp
+
+
 --- .class #id 
 
 ## Example
